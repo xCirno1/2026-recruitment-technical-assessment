@@ -106,6 +106,8 @@ def handle_create_recipe(entry: dict) -> bool:
 	if entry["type"] == "recipe":
 		entry["requiredItems"] = [RequiredItem(**i) for i in entry.get("requiredItems", [])]
 		model = RecipeEntry(**entry)
+		# We can also do set_ = set([item.name for item in model.requiredItems])
+		# and compare the length, but this is also a solution.
 		set_ = set()
 		# O(n) time complexity since item lookup in set is O(1)
 		for item in model.requiredItems:
